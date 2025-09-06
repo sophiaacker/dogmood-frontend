@@ -27,35 +27,50 @@ export function SnoutScoutIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100"
+      width="100"
+      height="100"
+      viewBox="0 0 80 80"
       fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="56" cy="50" r="30" fill="hsl(var(--primary))" />
       <path
-        d="M25.6 42.1c0-11.2 9.1-20.3 20.3-20.3V46c0 11.2-9.1 20.3-20.3 20.3S5.3 57.2 5.3 46c0-11.2 9.1-20.3 20.3-20.3v-4.6c-13.7 0-24.9 11.2-24.9 24.9s11.2 24.9 24.9 24.9 24.9-11.2 24.9-24.9V42.1z"
-        fill="hsl(var(--foreground))"
+        d="M40 8.8C25.6 8.8 14.8 17.1 12.3 29.9c-5.3 1.2-9.1 5.9-9.1 11.4 0 6.5 5.3 11.8 11.8 11.8 2.3 0 4.5-.7 6.3-1.8 2.5 8.3 10.3 14.5 19.5 14.5s17-6.2 19.5-14.5c1.8 1.1 4 1.8 6.3 1.8 6.5 0 11.8-5.3 11.8-11.8 0-5.5-3.8-10.2-9.1-11.4C65.2 17.1 54.4 8.8 40 8.8z"
+        fill="hsl(var(--primary))"
+        stroke="hsl(var(--primary-foreground))"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
       <path
-        d="M85.4 46c0-13.7-11.2-24.9-24.9-24.9v4.6c11.2 0 20.3 9.1 20.3 20.3v4.1c0 13.7-11.2 24.9-24.9 24.9s-24.9-11.2-24.9-24.9V46c0-11.2 9.1-20.3 20.3-20.3V21.1C47.2 21.1 36 32.3 36 46v4.1c0 13.7 11.2 24.9 24.9 24.9s24.9-11.2 24.9-24.9V46z"
-        fill="hsl(var(--foreground))"
+        d="M62.9 29.3C61.1 18.5 51.5 10.8 40 10.8c-11.5 0-21.1 7.7-22.9 18.5-1.1.2-2.1.5-3.1.9-1.3-10.8 6.2-20.1 16-20.1s17.3 9.3 16 20.1c-1-.4-2-.7-3-.9z"
+        fill="#D27D2D"
       />
       <path
-        d="M48.2,32.2c-3.1-2.4-6.8-3.9-10.8-3.9"
-        stroke="hsl(var(--foreground))"
-        strokeWidth="3"
+        d="M26.2 53.4c-1.7-1.4-2.8-3.4-2.8-5.7 0-4.1 3.3-7.4 7.4-7.4s7.4 3.3 7.4 7.4c0 2.3-1.1 4.3-2.8 5.7.1 0 .1 0 .2.1 4.7-2.3 8-7 8-12.4 0-8.2-6.7-14.8-14.8-14.8S14 32.9 14 41.1c0 5.4 3.3 10.1 8 12.4.1 0 .1 0 .2-.1z"
+        fill="hsl(var(--primary-foreground))"
+        opacity="0.8"
+      />
+      <path
+        d="M37.6 47.9c0 1.9-1.5 3.4-3.4 3.4s-3.4-1.5-3.4-3.4c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4z"
+        fill="hsl(var(--primary-foreground))"
+      />
+      <path
+        d="M36.1 49.3c1.5 1 3.4 1 4.9 0 .4-.3.9-.8.9-1.4 0-.8-.7-1.4-1.6-1.4h-2.7c-.9 0-1.6.6-1.6 1.4 0 .6.4 1.1.9 1.4z"
+        fill="#F59E47"
+      />
+      <circle cx="33" cy="35" r="2.5" fill="hsl(var(--primary-foreground))" />
+      <circle cx="47" cy="35" r="2.5" fill="hsl(var(--primary-foreground))" />
+      <path
+        d="M31.5 30.5c.5-1 1.5-1.5 2.5-1.5s2 .5 2.5 1.5"
+        stroke="hsl(var(--primary-foreground))"
+        strokeWidth="2"
         strokeLinecap="round"
       />
       <path
-        d="M68.2,32.2c3.1-2.4,6.8-3.9,10.8-3.9"
-        stroke="hsl(var(--foreground))"
-        strokeWidth="3"
+        d="M44.5 30.5c.5-1 1.5-1.5 2.5-1.5s2 .5 2.5 1.5"
+        stroke="hsl(var(--primary-foreground))"
+        strokeWidth="2"
         strokeLinecap="round"
       />
-      <circle cx="49.5" cy="42.5" r="3.5" fill="hsl(var(--foreground))" />
-      <circle cx="69.5" cy="42.5" r="3.5" fill="hsl(var(--foreground))" />
-      <circle cx="50" cy="65" r="8.7" fill="hsl(var(--card))" />
-      <circle cx="68" cy="65" r="8.7" fill="hsl(var(--card))" />
     </svg>
   );
 }
