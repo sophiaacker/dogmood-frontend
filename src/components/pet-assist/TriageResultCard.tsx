@@ -56,6 +56,14 @@ export function TriageResultCard({ result }: { result: TriageResult }) {
               </div>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="raw-output">
+            <AccordionTrigger>View Raw Backend Output</AccordionTrigger>
+            <AccordionContent>
+              <pre className="p-4 border rounded-lg bg-card text-sm">
+                {JSON.stringify(result, null, 2)}
+              </pre>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </CardContent>
     </Card>
