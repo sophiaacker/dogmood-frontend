@@ -44,6 +44,14 @@ export function TriageResultCard({ result }: { result: any }) {
   // Support for new and old API fields
   const { suggestion, reason, imageAnalysis, behavioralAnalysis } = result;
 
+  const analysisDetails = [];
+  if (imageAnalysis) {
+    analysisDetails.push({ title: 'Image Analysis Summary', content: imageAnalysis });
+  }
+  if (behavioralAnalysis) {
+    analysisDetails.push({ title: 'Behavioral Analysis Summary', content: behavioralAnalysis });
+  }
+
   return (
     <Card className="w-full">
       {config && (
@@ -73,23 +81,19 @@ export function TriageResultCard({ result }: { result: any }) {
         )}
         
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="details">
-            <AccordionTrigger>View Detailed AI Analysis</AccordionTrigger>
-            <AccordionContent className="space-y-4 pt-4">
-              {imageAnalysis && (
-                  <div className="p-4 border rounded-lg bg-card">
-                    <h4 className="font-semibold mb-1">Image Analysis Summary</h4>
-                    <p className="text-sm text-foreground/80">{imageAnalysis}</p>
+          {analysisDetails.length > 0 && (
+            <AccordionItem value="details">
+              <AccordionTrigger>View Detailed AI Analysis</AccordionTrigger>
+              <AccordionContent className="space-y-4 pt-4">
+                {analysisDetails.map((detail, index) => (
+                  <div key={index} className="p-4 border rounded-lg bg-card">
+                    <h4 className="font-semibold mb-1">{detail.title}</h4>
+                    <p className="text-sm text-foreground/80">{detail.content}</p>
                   </div>
-              )}
-              {behavioralAnalysis && (
-                  <div className="p-4 border rounded-lg bg-card">
-                    <h4 className="font-semibold mb-1">Behavioral Analysis Summary</h4>
-                    <p className="text-sm text-foreground/80">{behavioralAnalysis}</p>
-                  </div>
-              )}
-            </AccordionContent>
-          </AccordionItem>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
           <AccordionItem value="raw-output">
             <AccordionTrigger>View Raw Backend Output</AccordionTrigger>
             <AccordionContent>

@@ -86,7 +86,7 @@ export function TriageWizard() {
         {step === 'species' && (
           <>
             <CardHeader>
-              <CardTitle>Step 1: Choose your pet\'s species</CardTitle>
+              <CardTitle>Step 1: Choose your pet's species</CardTitle>
               <CardDescription>This helps our AI provide a more accurate analysis.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -110,7 +110,7 @@ export function TriageWizard() {
           <>
             <CardHeader>
               <CardTitle>Step 2: Provide Details</CardTitle>
-              <CardDescription>Upload a photo and describe your pet\'s unusual behavior.</CardDescription>
+              <CardDescription>Upload a photo and describe your pet's unusual behavior.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
@@ -118,7 +118,7 @@ export function TriageWizard() {
                 <ImageUploader image={image} onImageSelect={setImage} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="behaviors">Describe your pet\'s behavior (optional)</Label>
+                <Label htmlFor="behaviors">Describe your pet's behavior (optional)</Label>
                 <Textarea
                   id="behaviors"
                   name="behaviors"
