@@ -7,7 +7,7 @@ export default function Home() {
       <div className="w-full max-w-2xl">
         <header className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4 flex items-center gap-3">
-             <SnoutScoutIcon className="h-12 w-12 text-primary" />
+             <SnoutScoutIcon className="h-12 w-12" />
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight font-headline">
               SnoutScout
             </h1>
