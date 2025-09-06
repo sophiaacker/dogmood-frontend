@@ -1,4 +1,4 @@
-import { PawPrintIcon } from "@/components/icons";
+import { SnoutScoutIcon } from "@/components/icons";
 import { TriageWizard } from "@/components/pet-assist/TriageWizard";
 
 export default function Home() {
@@ -7,9 +7,9 @@ export default function Home() {
       <div className="w-full max-w-2xl">
         <header className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4 flex items-center gap-3">
-             <PawPrintIcon className="h-10 w-10 text-primary-foreground bg-primary p-2 rounded-full" />
+             <SnoutScoutIcon className="h-12 w-12 text-primary" />
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight font-headline">
-              PetAssist AI
+              SnoutScout
             </h1>
           </div>
           <p className="max-w-xl text-lg text-foreground/80">
