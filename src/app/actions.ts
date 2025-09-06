@@ -5,7 +5,7 @@ import { z } from 'zod';
 const triageSchema = z.object({
   species: z.string().min(1, 'Species is required.'),
   photoDataUri: z.string().min(1, 'A photo or video of your pet is required.'),
-  behaviors: z.string().min(10, 'Please describe the behavior in at least 10 characters.'),
+  behaviors: z.string().optional(),
 });
 
 export type TriageResult = {
@@ -53,9 +53,11 @@ export async function getTriageRecommendationAction(
     const apiFormData = new FormData();
     apiFormData.append('file', fileBlob, 'upload');
     apiFormData.append('species', species);
-    apiFormData.append('behaviors', behaviors);
+    if (behaviors) {
+      apiFormData.append('behaviors', behaviors);
+    }
 
-    const response = await fetch('http://127.0.0.1:8000/analyze', {
+    const response = await fetch('https://3d62112f9231.ngrok-free.app/analyze', {
       method: 'POST',
       body: apiFormData,
     });
