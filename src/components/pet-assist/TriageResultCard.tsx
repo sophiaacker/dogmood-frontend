@@ -42,7 +42,7 @@ export function TriageResultCard({ result }: { result: any }) {
   const config = recommendation ? recommendationConfig[recommendation] : null;
 
   // Support for new and old API fields
-  const { state, suggestion, reason, imageAnalysis, behavioralAnalysis } = result;
+  const { suggestion, reason, imageAnalysis, behavioralAnalysis } = result;
 
   return (
     <Card className="w-full">
@@ -76,12 +76,6 @@ export function TriageResultCard({ result }: { result: any }) {
           <AccordionItem value="details">
             <AccordionTrigger>View Detailed AI Analysis</AccordionTrigger>
             <AccordionContent className="space-y-4 pt-4">
-              {state && (
-                  <div className="p-4 border rounded-lg bg-card">
-                    <h4 className="font-semibold mb-1">State Analysis</h4>
-                    <p className="text-sm text-foreground/80">{state}</p>
-                  </div>
-              )}
               {imageAnalysis && (
                   <div className="p-4 border rounded-lg bg-card">
                     <h4 className="font-semibold mb-1">Image Analysis Summary</h4>
