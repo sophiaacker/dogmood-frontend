@@ -138,7 +138,7 @@ export function TriageWizard() {
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Analyzing... Please wait.
                   </>
-                ) : 'Get AI Triage'}
+                ) : 'Know thy pet'}
               </Button>
             </CardFooter>
           </>
