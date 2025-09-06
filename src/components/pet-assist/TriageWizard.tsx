@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useMemo, useTransition, useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useState, useMemo, useTransition, useEffect, useActionState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { getTriageRecommendationAction, type TriageResult } from "@/app/actions";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,7 +22,7 @@ const speciesOptions = [
 const initialState = { result: null, error: null };
 
 export function TriageWizard() {
-  const [formState, formAction] = useFormState(getTriageRecommendationAction, initialState);
+  const [formState, formAction] = useActionState(getTriageRecommendationAction, initialState);
   const [pending, startTransition] = useTransition();
   
   const [species, setSpecies] = useState<string | null>(null);
@@ -115,7 +114,7 @@ export function TriageWizard() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="image-upload">Photo of your pet</Label>
+                <Label htmlFor="image-upload">Upload photo or video of your pet</Label>
                 <ImageUploader image={image} onImageSelect={setImage} />
               </div>
               <div className="space-y-2">
