@@ -1,13 +1,10 @@
 'use server';
 
-import { analyzePetImageForSymptoms } from '@/ai/flows/analyze-pet-image-for-symptoms';
-import { interpretPetBehavior } from '@/ai/flows/interpret-pet-behavior-for-issue-categories';
-import { provideTriageRecommendation } from '@/ai/flows/provide-triage-recommendation-based-on-ai-analysis';
 import { z } from 'zod';
 
 const triageSchema = z.object({
   species: z.string().min(1, 'Species is required.'),
-  photoDataUri: z.string().min(1, 'An image of your pet is required.'),
+  photoDataUri: z.string().min(1, 'A photo or video of your pet is required.'),
   behaviors: z.string().min(10, 'Please describe the behavior in at least 10 characters.'),
 });
 
@@ -17,6 +14,18 @@ export type TriageResult = {
   imageAnalysis: string;
   behavioralAnalysis: string;
 };
+
+// Helper function to convert Data URI to Blob
+function dataURItoBlob(dataURI: string) {
+  const byteString = atob(dataURI.split(',')[1]);
+  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mimeString });
+}
 
 export async function getTriageRecommendationAction(
   prevState: { result: TriageResult | null; error: string | null; },
@@ -40,42 +49,35 @@ export async function getTriageRecommendationAction(
   const { species, photoDataUri, behaviors } = validatedFields.data;
 
   try {
-    const [imageAnalysisResult, behaviorAnalysisResult] = await Promise.all([
-      analyzePetImageForSymptoms({ species, photoDataUri }),
-      interpretPetBehavior({ species, behaviors }),
-    ]);
+    const fileBlob = dataURItoBlob(photoDataUri);
+    const apiFormData = new FormData();
+    apiFormData.append('file', fileBlob, 'upload');
+    apiFormData.append('species', species);
+    apiFormData.append('behaviors', behaviors);
 
-    if (!imageAnalysisResult || !behaviorAnalysisResult) {
-      throw new Error('Failed to get analysis from AI.');
-    }
-    
-    const imageAnalysis = imageAnalysisResult.summary;
-    const behavioralAnalysis = behaviorAnalysisResult.issueCategories;
-
-    const triageRecommendationResult = await provideTriageRecommendation({
-      species,
-      imageAnalysis,
-      behavioralAnalysis,
+    const response = await fetch('http://127.0.0.1:8000/analyze', {
+      method: 'POST',
+      body: apiFormData,
     });
 
-    if (!triageRecommendationResult) {
-      throw new Error('Failed to get triage recommendation from AI.');
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Analysis failed: ${response.status} ${errorText}`);
     }
+
+    const result = await response.json();
     
     return {
-      result: {
-        ...triageRecommendationResult,
-        imageAnalysis,
-        behavioralAnalysis,
-      },
+      result,
       error: null
     };
 
   } catch (error) {
     console.error(error);
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
     return {
       result: null,
-      error: 'An unexpected error occurred while analyzing. Please try again.',
+      error: errorMessage,
     };
   }
 }
