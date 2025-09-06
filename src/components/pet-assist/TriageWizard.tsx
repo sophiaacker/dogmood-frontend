@@ -75,7 +75,7 @@ export function TriageWizard() {
     return (
       <div className="space-y-4">
         <TriageResultCard result={formState.result as TriageResult} />
-        <Button onClick={handleReset} className="w-full" variant="outline">Start New Triage</Button>
+        <Button onClick={handleReset} className="w-full" variant="outline">Start New Scout</Button>
       </div>
     );
   }

@@ -57,7 +57,7 @@ export async function getTriageRecommendationAction(
       apiFormData.append('behaviors', behaviors);
     }
 
-    const response = await fetch('https://3d62112f9231.ngrok-free.app/analyze', {
+    const response = await fetch('https://6a986891ea04.ngrok-free.app/analyze', {
       method: 'POST',
       body: apiFormData,
     });
