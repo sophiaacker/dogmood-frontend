@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TriageWizard } from "@/components/pet-assist/TriageWizard";
+import TriageWizardClient from "@/components/pet-assist/TriageWizardClient";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
             Get instant AI-powered triage advice for your pet. Just a few steps to understand if your pet needs immediate care.
           </p>
         </header>
-        <TriageWizard />
+        <TriageWizardClient />
       </div>
     </main>
   );
