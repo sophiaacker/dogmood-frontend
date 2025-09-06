@@ -25,7 +25,7 @@ const recommendationConfig = {
 };
 
 export function TriageResultCard({ result }: { result: TriageResult }) {
-  const config = recommendationConfig[result.recommendation];
+  const config = recommendationConfig[result.recommendation.toLowerCase()];
 
   return (
     <Card className="w-full">
