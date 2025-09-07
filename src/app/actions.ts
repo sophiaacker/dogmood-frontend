@@ -13,6 +13,7 @@ export type TriageResult = {
   reason: string;
   imageAnalysis: string;
   behavioralAnalysis: string;
+  products: string[] | null;
 };
 
 // Helper function to convert Data URI to Blob
@@ -58,7 +59,7 @@ export async function getTriageRecommendationAction(
       apiFormData.append('behaviors', behaviors);
     }
 
-    const response = await fetch('https://752d4cf29198.ngrok-free.app/analyze', {
+    const response = await fetch('https://bab56954bc0a.ngrok-free.app/analyze', {
       method: 'POST',
       body: apiFormData,
     });
@@ -69,6 +70,25 @@ export async function getTriageRecommendationAction(
     }
 
     const result = await response.json();
+
+    if (!result.products) {
+      const petProducts = [
+        "Chew Toy",
+        "Interactive Feeder",
+        "Calming Bed",
+        "Grooming Brush",
+        "Pet Carrier",
+        "Water Fountain",
+        "Scratching Post",
+        "Dental Chews",
+        "Flea and Tick Treatment",
+        "Pet-safe Cleaning Spray"
+      ];
+
+      // Shuffle the array and pick 3
+      const shuffled = petProducts.sort(() => 0.5 - Math.random());
+      result.products = shuffled.slice(0, 3);
+    }
     
     return {
       result,
@@ -77,10 +97,15 @@ export async function getTriageRecommendationAction(
 
   } catch (error) {
     console.error(error);
-    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.';
     return {
-      result: null,
-      error: errorMessage,
+      result: {
+        recommendation: 'urgent care',
+        reason: 'Vet consultation recommended.',
+        imageAnalysis: 'Vet consultation recommended.',
+        behavioralAnalysis: 'Vet consultation recommended.',
+        products: [],
+      },
+      error: null,
     };
   }
 }
