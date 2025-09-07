@@ -1,4 +1,4 @@
-# Scout Snout
+#SnoutScout
 
 This project is a web application designed to provide preliminary information for pets. Users can upload a photo or audio of their pet, describe their pet's species and any observed behaviors, and receive a recommendation for next steps, such as monitoring the pet, scheduling a routine vet visit, or seeking urgent care.
 
