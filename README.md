@@ -1,9 +1,9 @@
-# Firebase Studio
+# Use firebase-version branch
 
-This is a NextJS starter in Firebase Studio.
+# How to run 
 
-To get started, take a look at src/app/page.tsx.
+1) npm install
 
-npm install
+2) npm run dev
 
-npm run dev
+In theory we are leaving our backend up so if you run this you should be connected to our backend
