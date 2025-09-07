@@ -24,6 +24,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  serverActions: {
+    bodySizeLimit: '30mb',
+  },
+  devIndicators: {
+    buildActivity: false
+  },
+  experimental: {
+    allowedDevOrigins: ['**']
+  }
 };
 
 export default nextConfig;

@@ -50,14 +50,15 @@ export async function getTriageRecommendationAction(
 
   try {
     const fileBlob = dataURItoBlob(photoDataUri);
+    const fileExtension = fileBlob.type.split('/')[1];
     const apiFormData = new FormData();
-    apiFormData.append('file', fileBlob, 'upload');
+    apiFormData.append('file', fileBlob, `upload.${fileExtension}`);
     apiFormData.append('species', species);
     if (behaviors) {
       apiFormData.append('behaviors', behaviors);
     }
 
-    const response = await fetch('https://99b1584e5ac3.ngrok-free.app/analyze', {
+    const response = await fetch('https://752d4cf29198.ngrok-free.app/analyze', {
       method: 'POST',
       body: apiFormData,
     });

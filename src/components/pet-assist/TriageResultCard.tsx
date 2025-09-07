@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 // The TriageResult type might need to be updated to reflect the new API response shape.
 // For now, we will handle the data dynamically.
 import type { TriageResult } from "@/app/actions";
-import { AlertTriangle, CheckCircle2, ShieldAlert } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ShieldAlert, Lightbulb, List, ShoppingBag, PawPrint, Star } from "lucide-react";
 
 const recommendationConfig = {
   'urgent care': {
@@ -26,6 +26,14 @@ const recommendationConfig = {
   }
 };
 
+// Type for the keys of recommendationConfig
+type RecommendationKey = keyof typeof recommendationConfig;
+
+// Type guard to check if a string is a valid RecommendationKey
+function isRecommendationKey(key: any): key is RecommendationKey {
+  return key in recommendationConfig;
+}
+
 export function TriageResultCard({ result }: { result: any }) {
   if (!result) {
     return (
@@ -39,10 +47,10 @@ export function TriageResultCard({ result }: { result: any }) {
   }
 
   const recommendation = result.recommendation ? result.recommendation.toLowerCase() : null;
-  const config = recommendation ? recommendationConfig[recommendation] : null;
+  const config = isRecommendationKey(recommendation) ? recommendationConfig[recommendation] : null;
 
   // Support for new and old API fields
-  const { suggestion, reason, imageAnalysis, behavioralAnalysis } = result;
+  const { suggestion, reason, imageAnalysis, behavioralAnalysis, products } = result;
 
   const analysisDetails = [];
   if (imageAnalysis) {
@@ -59,7 +67,7 @@ export function TriageResultCard({ result }: { result: any }) {
           <div className={`p-3 rounded-full ${config.className}`}>
               <config.Icon className="h-8 w-8" />
           </div>
-          <CardTitle className="text-2xl font-bold">{config.label}</CardTitle>
+          <CardTitle className="text-3xl font-bold">{config.label}</CardTitle>
           <CardDescription className="text-base max-w-md">{config.description}</CardDescription>
         </CardHeader>
       )}
@@ -68,15 +76,36 @@ export function TriageResultCard({ result }: { result: any }) {
       {!config && (suggestion || reason) && (
           <CardHeader>
               <CardTitle className="text-2xl font-bold">AI Analysis Result</CardTitle>
-              {suggestion && <CardDescription>{suggestion}</CardDescription>}
           </CardHeader>
       )}
 
       <CardContent className="space-y-4 px-4 sm:px-6 pb-6">
+        {suggestion && (
+            <div className="p-4 bg-muted/50 rounded-lg">
+              <h3 className="font-semibold mb-2 flex items-center"><Lightbulb className="h-5 w-5 mr-2" /> Suggestion</h3>
+              <p className="text-sm text-foreground/80">{suggestion}</p>
+            </div>
+        )}
         {reason && (
             <div className="p-4 bg-muted/50 rounded-lg">
-              <h3 className="font-semibold mb-2">Rationale</h3>
+              <h3 className="font-semibold mb-2 flex items-center"><List className="h-5 w-5 mr-2" /> Rationale</h3>
               <p className="text-sm text-foreground/80">{reason}</p>
+            </div>
+        )}
+        {products && products.length > 0 && (
+            <div className="p-4 bg-muted/50 rounded-lg">
+                <h3 className="font-semibold mb-4 flex items-center"><ShoppingBag className="h-5 w-5 mr-2" /> Recommended Products</h3>
+                <div className="space-y-2">
+                    {products.map((product: string, index: number) => (
+                        <div key={index} className={`flex items-center p-2 border rounded-lg ${index === 0 ? 'border-yellow-400' : ''}`}>
+                            <PawPrint className="h-5 w-5 mr-3 text-green-500" />
+                            <span className="text-sm text-foreground/80">{product}</span>
+                            {index === 0 && (
+                                <Star className="ml-auto h-5 w-5 text-yellow-400 fill-yellow-400" />
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
         )}
         
